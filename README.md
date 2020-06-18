@@ -2,7 +2,7 @@
 
 My attempt of a Marching cubes algorithm in Unity based on the Acknowledgments below.
 
-![gif](https://i.imgur.com/3FClpl2.gif)
+![gif](https://i.imgur.com/4mRtnsn.gif)
 
 ### Requirements
 
