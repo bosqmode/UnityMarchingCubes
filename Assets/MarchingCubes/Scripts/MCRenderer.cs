@@ -49,6 +49,7 @@ namespace bosqmode
 
                 //copy nodes from the manager to the thread
                 Node[] nodes = new Node[m_manager.CurrentNodes.Count];
+
                 m_manager.CurrentNodes.Values.CopyTo(nodes, 0);
 
                 m_thread = new Thread(ThreadWorker);

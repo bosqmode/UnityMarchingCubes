@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_manager: {fileID: 1724385309}
   m_pointcloud: {fileID: 889980277}
+  m_includeColors: 0
   m_confidenceThreshhold: 0.65
 --- !u!4 &945032392
 Transform:
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f15d87fbb8fa84697d1277456d10ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RecalculateBoundsNormalsTangets: 1
 --- !u!23 &1724385312
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1323,7 +1325,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0a791f7505a0ef14eb00673b17406609, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

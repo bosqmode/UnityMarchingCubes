@@ -23,9 +23,15 @@ This sets the resolution for the nodes/grid.
 1 being one unity unit
 2 being 0.5 an so on.
 
-### Populate(Vector3) and Populate(Vector3[])
+### Populate(Vector3), Populate(Vector3[]) and Populate(Vector3 Color)
 Populates (adds a point to the grid and recalculates the changes for that addition)
 a world-space position or positions.
+
+Optionally one can also set the vertex color of the point by providing a color.
+(Defaults to white)
+
+![gif](https://i.imgur.com/Q5uAX4J.gif)
+
 
 ### Delete(Vector3) and Delete(Vector3[])
 Deletes a point or points in a world-space coordinate and

@@ -29,6 +29,21 @@ namespace bosqmode
         private Vector3 m_NodePos;
         private MarchingCubes m_Manager;
         private MeshPart m_Mesh = new MeshPart(Meshes.INVALID);
+        private Color? m_Color;
+
+        public Color Color
+        {
+            get
+            {
+                if(m_Color.HasValue)
+                    return m_Color.Value;
+                return Color.white;
+            }
+            set
+            {
+                m_Color = value;
+            }
+        }
 
         public MeshPart Mesh
         {
@@ -70,8 +85,11 @@ namespace bosqmode
             }
         }
 
-        public Node(MarchingCubes manager, Vector3 roundedPos, bool haspoint = false)
+        public Node(MarchingCubes manager, Vector3 roundedPos, bool haspoint = false, Color? color = null)
         {
+            if (color.HasValue)
+                m_Color = color.Value;
+
             m_Manager = manager;
             m_NodePos = roundedPos;
             m_PointInside = haspoint;
@@ -113,6 +131,7 @@ namespace bosqmode
             {
                 m_Manager.TryGetMeshPart(this, out MeshPart part);
                 m_Mesh = part;
+                m_Mesh.color = Color;
             }
         }
     }

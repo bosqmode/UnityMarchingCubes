@@ -21,7 +21,7 @@ namespace bosqmode
             {
                 yield return null;
 
-                m_manager.Populate(transform.position + new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(-5f, 5f)));
+                m_manager.Populate(transform.position + new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(-5f, 5f)), new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1));
 
                 count++;
                 yield return null;

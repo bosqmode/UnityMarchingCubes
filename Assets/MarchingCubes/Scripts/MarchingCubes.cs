@@ -39,7 +39,7 @@ namespace bosqmode
     {
         [SerializeField]
         [Tooltip("Resolution of the grid, 1 equals to one unity unit, 2 == 0.5 and so on")]
-        [Range(1,16)]
+        [Range(1,64)]
         private int m_Resolution = 2;
         public int Resolution
         {
@@ -111,6 +111,7 @@ namespace bosqmode
         public bool TryGetMeshPart(Node node, out MeshPart part)
         {
             part = new MeshPart(Meshes.INVALID);
+            part.color = node.Color;
 
             if (Parts.ContainsKey(node.VacantNeighbours))
             {
@@ -174,7 +175,24 @@ namespace bosqmode
 
             for (int i = 0; i < positions.Length; i++)
             {
-                PopulatePosition(positions[i]);
+                PopulatePosition(positions[i], Color.white);
+            }
+
+            OnUpdate?.Invoke(m_NodesChanged.ToArray());
+        }
+
+        /// <summary>
+        /// Populates an array of worldspace positions with vertex colors
+        /// </summary>
+        /// <param name="positions">Worldspace position array</param>
+        /// <param name="colors">vertex colors</param>
+        public void Populate(Vector3[] positions, Color[] colors)
+        {
+            m_NodesChanged.Clear();
+
+            for (int i = 0; i < positions.Length; i++)
+            {
+                PopulatePosition(positions[i], colors[i]);
             }
 
             OnUpdate?.Invoke(m_NodesChanged.ToArray());
@@ -205,7 +223,16 @@ namespace bosqmode
         {
             m_NodesChanged.Clear();
 
-            PopulatePosition(position);
+            PopulatePosition(position, Color.white);
+
+            OnUpdate?.Invoke(m_NodesChanged.ToArray());
+        }
+
+        public void Populate(Vector3 position, Color col)
+        {
+            m_NodesChanged.Clear();
+
+            PopulatePosition(position, col);
 
             OnUpdate?.Invoke(m_NodesChanged.ToArray());
         }
@@ -227,7 +254,7 @@ namespace bosqmode
         /// internal handling populating
         /// </summary>
         /// <param name="position">WSpace position</param>
-        private void PopulatePosition(Vector3 position)
+        private void PopulatePosition(Vector3 position, Color color)
         {
             //Get the grid/node position for current resolution
             Vector3 roundedPosition = Utils.RoundToResolution(position, m_Resolution);
@@ -236,6 +263,7 @@ namespace bosqmode
             if (!m_Nodes.ContainsKey(roundedPosition))
             {
                 Node newNode = new Node(this, roundedPosition, true);
+                newNode.Color = color;
                 m_Nodes.Add(roundedPosition, newNode);
                 m_NodesChanged.Add(newNode);
                 AddOrRecalculateNeighbours(newNode);
@@ -282,7 +310,7 @@ namespace bosqmode
                 Vector3 pos = node.NodePos + item.Value;
                 if (!m_Nodes.ContainsKey(pos))
                 {
-                    Node neighbourNode = new Node(this, pos);
+                    Node neighbourNode = new Node(this, pos, color: node.Color);
                     m_Nodes.Add(pos, neighbourNode);
                     m_NodesChanged.Add(neighbourNode);
                 }
